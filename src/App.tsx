@@ -37,6 +37,7 @@ const createInitialGameState = (): GameState => ({
 function App() {
   const [gameState, setGameState] = useState<GameState>(createInitialGameState);
   const [onlineGameId, setOnlineGameId] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [onlinePlayerId, setOnlinePlayerId] = useState<string | null>(null);
   const [playerIndexInGame, setPlayerIndexInGame] = useState<0 | 1 | null>(null);
   const [serverMessageLog, setServerMessageLog] = useState<string[]>([]);
