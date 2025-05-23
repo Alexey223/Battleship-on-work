@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.label {
+  font-size: 1rem;
+  color: var(--light-grey);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.options {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--primary-dark-blue);
+  border: 1px solid var(--secondary-blue);
+  border-radius: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--light-grey);
+}
+
+.option:hover:not(:has(input:disabled)) {
+  background-color: var(--secondary-blue);
+}
+
+.option input[type="radio"] {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+
+.option input[type="radio"]:disabled {
+  cursor: not-allowed;
+}
+
+.option span {
+  font-size: 1rem;
+}
+
+.option:has(input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.option:has(input:checked) {
+  background-color: var(--accent-teal);
+  color: var(--primary-dark-blue);
+  font-weight: 600;
+}
+
+.option:has(input:checked):hover:not(:has(input:disabled)) {
+  background-color: #36A59F;
+} 

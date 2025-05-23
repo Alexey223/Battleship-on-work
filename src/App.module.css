@@ -1,0 +1,243 @@
+:root {
+  --primary-dark-blue: #0A2463; /* Глубокий темно-синий */
+  --primary-dark-blue-rgb: 10, 36, 99; /* Для rgba() */
+  --secondary-blue: #3D84A8;    /* Более светлый синий для акцентов */
+  --secondary-blue-rgb: 61, 132, 168; /* <--- ДОБАВЛЕНО */
+  --accent-teal: #48D1CC;       /* Бирюзовый акцент */
+  --accent-teal-rgb: 72, 209, 204; /* Для rgba() */
+  --accent-coral: #FF7F50;      /* Коралловый для попаданий/ошибок */
+  --light-grey: #F8F9FA;       /* Очень светлый серый / почти белый */
+  --medium-grey: #E9ECEF;      /* Средний серый для границ */
+  --dark-grey: #4A5568;        /* Темно-серый для текста или фона */
+  --text-light: #F8F9FA;             /* Для темных фонов, если останутся */
+  --text-dark: #2c3e50; 
+
+  /* Новые цвета для светлой темы с морскими акцентами */
+  --background-gradient-start: #D0E8F2; /* Светло-голубой (небо) */
+  --background-gradient-end: #79A6DC;   /* Средне-синий (вода) */
+  --surface-color: #FFFFFF;             /* Белый для карточек/контейнеров */
+  --surface-alpha-color: rgba(255, 255, 255, 0.9); /* Белый с прозрачностью */
+  --text-primary-on-light: #2c3e50;   /* Темно-синий текст на светлом фоне */
+  --text-secondary-on-light: #4A5568; /* Серый текст на светлом фоне */
+  --border-color-light: #B0C4DE;       /* Светло-стальной синий для рамок */
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  /* Градиентный фон */
+  background: linear-gradient(180deg, var(--background-gradient-start) 0%, var(--background-gradient-end) 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: var(--text-primary-on-light); /* Основной цвет текста на новом фоне */
+}
+
+.title {
+  font-size: 3rem; /* Еще немного крупнее */
+  color: var(--text-primary-on-light); /* Темный текст на светлом градиенте */
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.settingsContainer {
+  display: flex;
+  flex-direction: column; /* Элементы настроек друг под другом */
+  align-items: center; /* Центрируем их */
+  gap: 1.5rem; /* Увеличим отступ */
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background-color: var(--surface-alpha-color); /* Белый с прозрачностью */
+  border-radius: 16px; /* Более скругленные углы */
+  width: 100%;
+  max-width: 450px; 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border: 1px solid var(--border-color-light);
+}
+
+.gameOver {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--surface-color);
+  color: var(--text-primary-on-light);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  z-index: 1100; /* Выше чем PlayerSwitchScreen */
+  width: 90%;
+  max-width: 450px;
+}
+
+.gameOver h2 {
+  color: var(--accent-coral); /* Коралловый для заголовка Game Over */
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.gameOver p {
+  color: var(--text-secondary-on-light);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.gameOver button {
+  background-color: var(--accent-teal);
+  color: var(--primary-dark-blue); /* Темный текст на светлой кнопке */
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.gameOver button:hover {
+  background-color: #36A59F;
+  transform: translateY(-2px);
+}
+
+.difficultySelector select:disabled {
+  background-color: #4a5568;
+  cursor: not-allowed;
+}
+
+/* WebSocket Test Info Styles */
+.wsInfo {
+  background-color: var(--surface-alpha-color);
+  color: var(--text-primary-on-light);
+  padding: 1rem;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+  max-width: 700px; 
+  width: 90%;
+  text-align: left;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.wsInfo p {
+  margin: 0.5rem 0;
+}
+
+.wsInfo button {
+  background-color: var(--secondary-blue);
+  color: var(--text-light);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.wsInfo button:disabled {
+  background-color: var(--dark-grey);
+  opacity: 0.7;
+}
+
+.wsInfo button:hover:not(:disabled) {
+  background-color: #307998;
+}
+
+/* Online Game Setup Styles */
+.onlineSetupContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding: 1rem 0 0 0; /* Убираем лишний фон, т.к. родитель уже стилизован */
+}
+
+.onlineSetupContainer button {
+  background-color: var(--secondary-blue);
+  color: var(--text-light);
+}
+.onlineSetupContainer button:hover:not(:disabled) {
+  background-color: #307998; /* Темнее secondary-blue */
+}
+
+.joinGameContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.gameIdInput {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--medium-grey);
+  background-color: var(--light-grey);
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.gameIdInput::placeholder {
+  color: #78909c; /* Светлее серого */
+}
+
+/* Online Game Info Styles */
+.onlineGameInfo {
+  margin-top: 0.5rem;
+  padding: 10px;
+  background-color: rgba(255,255,255, 0.07);
+  border-radius: 4px;
+}
+
+.onlineGameInfo p {
+  margin: 5px 0;
+}
+
+.onlineGameInfo p strong {
+ color: var(--secondary-blue);
+}
+
+.waitingMessage {
+  color: #E6A23C; /* Более теплый желтый */
+}
+
+.opponentJoinedMessage {
+  color: #67C23A; /* Более мягкий зеленый */
+}
+
+/* Message Log Styles */
+.messageLog {
+  margin-top: 1rem;
+  width: 100%;
+  max-height: 120px; 
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color-light);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.messageLog p {
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 5px;
+  font-size: 0.85rem;
+  color: var(--text-secondary-on-light);
+}
+
+.messageLog pre {
+  white-space: pre-wrap; 
+  word-break: break-all; 
+  margin: 0;
+  padding: 8px;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 3px;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+  color: var(--text-primary-on-light);
+} 

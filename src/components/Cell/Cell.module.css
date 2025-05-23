@@ -1,0 +1,134 @@
+.cell {
+  aspect-ratio: 1;
+  background-color: var(--surface-color); /* Белый фон ячейки */
+  border: 1px solid var(--border-color-light); /* Светлая граница */
+  border-radius: 4px; /* Чуть больше скругление */
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem; /* Размер для иконок */
+  font-weight: bold;
+}
+
+.cell:hover:not(.hit):not(.miss):not(.sunk_ship_segment):not(.inactive) {
+  background-color: var(--medium-grey); /* Светло-серый ховер */
+  border-color: var(--secondary-blue);
+  transform: scale(1.05);
+}
+
+/* Стили для неактивных клеток (когда игра закончена) */
+.cell:not(.hit):not(.miss):not(.ship) {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.cell:not(.hit):not(.miss):not(.ship):hover {
+  background-color: transparent;
+  border-color: #ccc;
+  transform: none;
+}
+
+.empty {
+  background-color: #f5f5f5;
+}
+
+.ship {
+  background-color: var(--ship-color, var(--secondary-blue));
+  /* Можно добавить легкую текстуру или градиент для кораблей */
+}
+
+.hit {
+  background-color: var(--accent-coral); /* Static background for a hit cell */
+  color: var(--text-light); /* White X */
+  cursor: not-allowed;
+}
+
+/* Modifier class: when .hit is also .hitWhileAnimating, make background transparent */
+.hit.hitWhileAnimating {
+  background-color: transparent !important; /* Allows global hit-animation (fire) to be visible */
+}
+
+.hit::after {
+  content: '✕';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.miss {
+  background-color: #a0aec0; /* Более светлый серый для промаха */
+  color: var(--surface-color); /* Белая точка */
+  cursor: not-allowed;
+  /* Local miss animation can be kept or removed if global one is preferred */
+  /* animation: missAnimation 0.4s ease-out; */ 
+}
+
+.miss::after {
+  content: '·';
+  font-size: 2.8rem; /* Крупная точка */
+  line-height: 1; /* Adjusted for better centering with flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sunk_ship_segment {
+  background-color: var(--text-primary-on-light); /* Темный цвет для потопленного */
+  color: var(--accent-coral); /* Коралловая иконка */
+  cursor: not-allowed;
+  animation: hitAnimation 0.3s ease-out; /* This is the local @keyframes hitAnimation for scale/opacity */
+}
+
+.sunk_ship_segment::after {
+  content: '💥'; /* Более явный взрыв */
+  font-size: 1.1rem; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.inactive {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.inactive:hover {
+  transform: none;
+  background-color: var(--light-grey);
+}
+
+/* Анимации */
+@keyframes hitAnimation {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes missAnimation {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Эффект волны при наведении */
+.cell::after {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: background-color 0.2s ease;
+  background-color: transparent;
+}
+
+.cell:hover:not(.hit):not(.miss):not(.sunk_ship_segment):not(.inactive)::after {
+  background-color: rgba(var(--secondary-blue-rgb, 61, 132, 168), 0.2);
+} 

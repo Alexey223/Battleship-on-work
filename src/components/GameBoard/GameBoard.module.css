@@ -1,0 +1,168 @@
+.board {
+  display: grid;
+  gap: 1px;
+  background-color: var(--border-color-light);
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color-light);
+  box-shadow: 0 2px 5px rgba(var(--text-primary-on-light-rgb, 44, 62, 80), 0.1);
+  transition: all 0.3s ease;
+  width: clamp(280px, 90vw, 400px);
+  max-width: 400px;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+/* Стили для разных размеров доски */
+.board[data-size="5"] {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.board[data-size="8"] {
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.board[data-size="10"] {
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: #ecf0f1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:hover:not(.hit):not(.miss) {
+  background-color: #bdc3c7;
+  transform: scale(1.05);
+}
+
+.cell.hit {
+  background-color: #e74c3c;
+  cursor: not-allowed;
+}
+
+.cell.miss {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.cell.ship {
+  background-color: var(--ship-color, #3498db);
+}
+
+.cell.ship.hit {
+  background-color: #c0392b;
+}
+
+/* Анимация для попаданий */
+@keyframes hitAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cell.hit {
+  animation: hitAnimation 0.3s ease;
+}
+
+/* Анимация для промахов */
+@keyframes missAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cell.miss {
+  animation: missAnimation 0.3s ease;
+}
+
+/* Стили для текущего игрока (активная доска для стрельбы) */
+.board[data-current-player="true"]:not([data-opponent-board="true"]) {
+  /* Этот селектор для доски игрока, когда его ход, но он не должен по ней стрелять */
+}
+
+.board[data-current-player="true"][data-opponent-board="true"] {
+  /* Эта доска оппонента, когда ход текущего игрока - по ней можно стрелять */
+  box-shadow: 0 0 0 3px var(--accent-teal), 0 2px 5px rgba(var(--text-primary-on-light-rgb, 44, 62, 80), 0.1);
+}
+
+.board[data-current-player="false"]:not([data-opponent-board="true"]) {
+   /* Своя доска, но не мой ход - можно немного затемнить */
+  opacity: 0.8;
+}
+
+.board[data-current-player="false"][data-opponent-board="true"] {
+  /* Доска оппонента, не мой ход - клики заблокированы логикой, можно тоже затемнить */
+  opacity: 0.8;
+  cursor: default;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .board {
+    width: clamp(200px, 85vw, 300px);
+    padding: 6px;
+  }
+}
+
+/* Координаты */
+.coordinateOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+}
+
+.columnLabels {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: -20px;
+  left: 8px;
+  right: 8px;
+  height: 20px;
+  color: var(--text-secondary-on-light);
+}
+
+.rowLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  left: -20px;
+  top: 8px;
+  bottom: 8px;
+  width: 20px;
+  color: var(--text-secondary-on-light);
+}
+
+.coordinateLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--text-secondary-on-light);
+  font-weight: 500;
+} 

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Arial', sans-serif; /* Considered a more readable font */
 }
 
 .App-logo {
@@ -26,6 +27,127 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Styles for game containers and layout */
+.gameContainer {
+  display: flex;
+  justify-content: space-around; /* Increase space between boards and controls */
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.settingsContainer, .boardContainer {
+  background-color: #f0f0f0; /* Lighter background for containers */
+  padding: 20px; /* Increased padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Enhanced shadow for cards */
+  margin: 10px; /* Added margin between containers */
+}
+
+.boardContainer {
+  margin-top: 20px; /* Increased margin between settings and boards */
+}
+
+/* Styling for controls (buttons, selectors) */
+button, select {
+  background-color: #007bff; /* Modern flat blue */
+  color: white;
+  border: none; /* Removed border */
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, select:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:focus, select:focus {
+  outline: none; /* Removed outline */
+  /* box-shadow: 0 0 0 2px rgba(0,123,255,.5); Focus ring removed for cleaner look as per no border */
+}
+
+/* Specifically for select elements like difficulty selector */
+select {
+  border-radius: 8px; /* Smoother corners for selectors */
+}
+
+/* Styling for player turn indicators - simple border highlight */
+.activePlayerBoard {
+  border: 3px solid #007bff; /* Blue border for active player */
+  box-shadow: 0 0 10px rgba(0,123,255,.5); /* Glow effect */
+  transition: border 0.5s ease, box-shadow 0.5s ease; /* Smooth transition for active player board */
+}
+
+/* Improved turn indicator circles */
+.turnIndicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #B0BEC5; /* More expressive grey */
+  display: inline-block;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.activeTurnIndicator {
+  background-color: #28a745; /* Green for active turn */
+}
+
+/* Styles for difficulty description field */
+.difficultyDescription {
+ padding: 15px; /* Adjusted internal paddings */
+ text-align: justify; /* Stretch text inside notification block */
+}
+
+/* Animation for hit */
+@keyframes hitAnimation {
+  0% { background-color: red; transform: scale(1); }
+  50% { background-color: darkred; transform: scale(1.1); }
+  100% { background-color: red; transform: scale(1); }
+}
+
+.hit-animation {
+  animation: hitAnimation 0.5s ease-out forwards; /* 'forwards' keeps the state of the last keyframe */
+}
+
+/* Animation for miss */
+@keyframes missAnimation {
+  0% { background-color: #B0BEC5; } /* Start with the expressive grey */
+  50% { background-color: #78909C; } /* Transition to a darker shade of grey */
+  100% { background-color: #B0BEC5; } /* Return to the expressive grey */
+}
+
+.miss-animation {
+  animation: missAnimation 0.7s ease-in-out; /* Smoother and longer animation */
+}
+
+/* Animation for turn change - e.g., board highlight */
+@keyframes turnChangeAnimation {
+  0% { box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 6px 12px rgba(0,123,255,0.4), 0 0 15px rgba(0,123,255,0.3); }
+  100% { box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+}
+
+.turn-change-animation {
+  animation: turnChangeAnimation 1s ease-in-out;
+}
+
+/* Typography */
+.gameTitle {
+  font-family: 'Georgia', serif; /* More expressive and modern font for title */
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.boardLabels {
+  font-size: 1.2em; /* Larger font size for board labels */
+  color: #555;
 }
 
 @keyframes App-logo-spin {

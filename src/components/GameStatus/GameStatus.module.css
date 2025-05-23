@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.status {
+  text-align: center;
+}
+
+.message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.hint {
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.currentPlayer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #bdc3c7; /* Default inactive color */
+  transition: background-color 0.3s ease;
+  /* animation: pulse 1.5s infinite; // Keep pulse or make it conditional? For now, remove for clarity */
+}
+
+.indicatorPlayer1 {
+  background-color: #2ecc71; /* Green for Player 1 */
+  animation: pulse 1.5s infinite; /* Pulse only for active player */
+}
+
+.indicatorPlayer2 {
+  background-color: #3498db; /* Blue for Player 2/AI */
+  animation: pulse 1.5s infinite; /* Pulse only for active player */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+} 
