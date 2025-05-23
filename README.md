@@ -1,46 +1,111 @@
-# Getting Started with Create React App
+# Battleship Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Это классическая игра "Морской бой", реализованная с использованием React для фронтенда и Node.js с WebSocket для бэкенда. Поддерживает как одиночный режим против ИИ, так и мультиплеерный режим для игры с другом.
 
-## Available Scripts
+## Особенности
 
-In the project directory, you can run:
+*   **Одиночный режим:** Играйте против компьютера с настраиваемой сложностью.
+*   **Мультиплеерный режим:** Создавайте игровые комнаты или присоединяйтесь к существующим по ID для игры с другими игроками.
+*   Интерактивное размещение кораблей на доске.
+*   Визуальное отображение выстрелов, попаданий и потопленных кораблей.
+*   Звуковые эффекты для улучшения игрового опыта.
+*   Кнопка для копирования ID игровой комнаты в мультиплеере.
+
+## Технологии
+
+*   **Фронтенд:** React, TypeScript, CSS Modules
+*   **Бэкенд:** Node.js, Express, WebSocket (ws), TypeScript
+*   **Инструменты разработки:** Create React App, Nodemon, ESLint, Prettier
+
+## Запуск проекта
+
+Для запуска проекта вам понадобятся установленные Node.js и npm (или Yarn).
+
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/Alexey223/Battleship-on-work.git
+cd Battleship-on-work/battleship
+```
+
+### 2. Установка зависимостей
+
+Необходимо установить зависимости как для клиентской, так и для серверной части.
+
+**Для клиента (в папке `battleship`):**
+```bash
+npm install
+# или
+# yarn install
+```
+
+**Для сервера (в папке `battleship/server`):**
+```bash
+cd server
+npm install
+# или
+# yarn install
+cd ..
+```
+
+### 3. Запуск сервера
+
+В отдельном терминале, находясь в папке `battleship/server`:
+```bash
+npm start
+```
+По умолчанию сервер запустится на порту 8080.
+
+### 4. Запуск клиента
+
+В другом терминале, находясь в корневой папке проекта (`battleship`):
+```bash
+npm start
+# или
+# yarn start
+```
+Клиентское приложение откроется в браузере по адресу [http://localhost:3000](http://localhost:3000).
+
+## Доступные скрипты (Клиент)
+
+В директории проекта (`battleship`) вы можете запускать:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Запускает приложение в режиме разработки.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Запускает тесты в интерактивном режиме.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Собирает приложение для продакшена в папку `build`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Структура проекта (упрощенно)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+battleship/
+├── public/         # Статические ассеты для клиента
+├── server/         # Бэкенд (Node.js/WebSocket сервер)
+│   ├── src/
+│   └── package.json
+├── src/            # Исходный код React-приложения (клиент)
+│   ├── components/
+│   ├── core/
+│   ├── contexts/
+│   ├── hooks/
+│   ├── types/
+│   ├── App.tsx
+│   └── index.tsx
+├── .gitignore
+├── package.json
+└── README.md       # Этот файл
+```
 
-### `npm run eject`
+## Дальнейшие планы (Примеры)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+*   Улучшение ИИ.
+*   Более детальная статистика игр.
+*   Возможность выбора размера доски.
+*   Сохранение настроек пользователя.

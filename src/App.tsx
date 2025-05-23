@@ -37,12 +37,12 @@ const createInitialGameState = (): GameState => ({
 function App() {
   const [gameState, setGameState] = useState<GameState>(createInitialGameState);
   const [onlineGameId, setOnlineGameId] = useState<string | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [onlinePlayerId, setOnlinePlayerId] = useState<string | null>(null);
   const [playerIndexInGame, setPlayerIndexInGame] = useState<0 | 1 | null>(null);
   const [serverMessageLog, setServerMessageLog] = useState<string[]>([]);
   const [gameIdToJoin, setGameIdToJoin] = useState<string>("");
   const [opponentJoined, setOpponentJoined] = useState<boolean>(false);
+  const [copySuccess, setCopySuccess] = useState<string>('');
 
   const handleServerMessage = useCallback((message: ServerMessage) => {
     console.log('[App.tsx] Received typed message from server:', message);
@@ -336,6 +336,20 @@ function App() {
     }
   };
 
+  const handleCopyGameId = async () => {
+    if (onlineGameId) {
+      try {
+        await navigator.clipboard.writeText(onlineGameId);
+        setCopySuccess('Copied!');
+        setTimeout(() => setCopySuccess(''), 2000); // Clear message after 2 seconds
+      } catch (err) {
+        console.error('Failed to copy game ID: ', err);
+        setCopySuccess('Failed to copy');
+        setTimeout(() => setCopySuccess(''), 2000);
+      }
+    }
+  };
+
   // Determine if GameLayout should render based on player data availability
   const effectivePlayerIndexInGame = gameState.gameMode === 'single' && playerIndexInGame === null ? 0 : playerIndexInGame;
 
@@ -384,7 +398,12 @@ function App() {
 
           {onlineGameId && (
             <div className={styles.onlineGameInfo}>
-              <p>Online Game ID: <strong>{onlineGameId}</strong></p>
+              <p>Online Game ID: <strong className={styles.gameIdStrong}>{onlineGameId}</strong>
+                <button onClick={handleCopyGameId} className={styles.copyButton} title="Copy Game ID">
+                  📋
+                </button>
+                {copySuccess && <span className={styles.copySuccessMessage}>{copySuccess}</span>}
+              </p>
               <p>You are: Player {playerIndexInGame !== null ? playerIndexInGame + 1 : 'N/A'}</p>
               {playerIndexInGame === 0 && !opponentJoined && <p className={styles.waitingMessage}>Waiting for opponent to join...</p>}
               {opponentJoined && <p className={styles.opponentJoinedMessage}>Opponent has joined! Ready for next step.</p>}

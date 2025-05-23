@@ -240,4 +240,38 @@
   margin-bottom: 5px;
   font-size: 0.8rem;
   color: var(--text-primary-on-light);
+}
+
+/* Styles for Copy Game ID Button */
+.copyButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem; /* Slightly larger for better visibility */
+  margin-left: 10px; /* More space from the ID */
+  padding: 2px 6px;
+  vertical-align: middle;
+  color: var(--secondary-blue); /* Use a theme color */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.copyButton:hover {
+  color: var(--accent-teal); /* Change color on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.copySuccessMessage {
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #28a745; /* Green for success */
+  font-weight: 500;
+  display: inline-block; /* To allow margin */
+  padding: 2px 5px;
+  background-color: rgba(40, 167, 69, 0.1); /* Light green background */
+  border-radius: 4px;
+}
+
+.gameIdStrong {
+  user-select: text; /* Allow selecting the ID text */
+  font-weight: 600; /* Make it slightly bolder if it isn't already */
 } 
